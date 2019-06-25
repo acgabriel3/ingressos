@@ -1,0 +1,38 @@
+const { Pool } = require('pg')
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'lojas_cerradinho',
+  password: 'root',
+  port: 5432,
+})
+
+const query = (text, params = [], callback = (err, result) => { }) => {
+  const start = Date.now()
+  return pool.query(text, params, (err, res) => {
+    const duration = Date.now() - start
+    err ? console.log('erro encontrado', err) :
+      console.log('executed query', { query: text, elapsedTime: String(duration) + ' ms', result: res.rowCount })
+    callback(err, res)
+  })
+}
+
+createDatabase = (callback) => {
+  return query(`
+    CREATE TABLE IF NOT EXISTS clientes (
+      id SERIAL NOT NULL PRIMARY KEY,
+      nome VARCHAR(50) NOT NULL
+    )`, [], callback
+  )
+}
+
+dropDatabase = (callback) => {
+  query(`
+    DROP TABLE IF EXISTS clientes;
+  `, [], callback)
+}
+
+module.exports = {
+  query, createDatabase, dropDatabase
+}
