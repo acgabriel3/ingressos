@@ -14,3 +14,5 @@ ALTER TABLE `accounts` ADD PRIMARY KEY (`id`);
 ALTER TABLE `accounts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 
 INSERT INTO accounts VALUES('11', "teste", "1234", "a");
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
