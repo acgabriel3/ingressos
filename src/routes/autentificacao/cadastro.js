@@ -1,7 +1,8 @@
 const cadastro = require('express').Router()
-const exec = require('../../controllers/autentificacao')
+const path = require('path')
 
-cadastro.get('/', exec.paginaRegistro /*, next pagina login*/)
-cadastro.post('/', exec.cadastra)
+cadastro.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../../../views/cadastro.html'))
+})
 
 module.exports = cadastro
