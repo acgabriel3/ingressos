@@ -1,5 +1,5 @@
 var mysql = require('@mysql/xdevapi');
-
+var db = require('../db/index')
 
 exports.loga = (request, response, next) => {
     response.send("oi, to no loga")

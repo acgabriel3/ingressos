@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Escreva seu nome e usuário</title>
+	<style>
+		.login-form {
+			width: 300px;
+			margin: 0 auto;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+
+		.login-form h1 {
+			text-align: center;
+			color: #4d4d4d;
+			font-size: 24px;
+			padding: 20px 0 20px 0;
+		}
+
+		.login-form input[type="password"],
+		.login-form input[type="text"] {
+			width: 100%;
+			padding: 15px;
+			border: 1px solid #dddddd;
+			margin-bottom: 15px;
+			box-sizing: border-box;
+		}
+
+		.login-form input[type="submit"] {
+			width: 100%;
+			padding: 15px;
+			background-color: #535b63;
+			border: 0;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+		}
+
+		.login-form input[type="submit"] {
+			width: 100%;
+			padding: 15px;
+			background-color: #535b63;
+			border: 0;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+			margin-bottom: 2px;
+		}
+		.login-form .voltar input[type="submit"] {
+			width: 100%;
+			padding: 15px;
+			background-color: lightcoral;
+			border: 0;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+			margin-bottom: 2px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="login-form">
+		<h1>Preencha os campos abaixo</h1>
+		<form action="/clientes" method="POST">
+			<input type="text" name="nome" placeholder="Nome" required autocomplete="off">
+			<input type="text" name="cpf" placeholder="CPF" required autocomplete="off">
+			<input type="text" name="email" placeholder="E-mail" required autocomplete="off">
+			<input type="password" name="password" placeholder="Senha" required autocomplete="off">
+			<input type='submit' value="Registrar-se">
+		</form>
+		<form class="voltar" action="../">
+			<input type="submit" value="Voltar">
+		</form>
+	</div>
+</body>
+
+</html>

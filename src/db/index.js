@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const { mysql } = require('@mysql/xdevapi')
+=======
+const { Pool } = require('pg')
+const queries = require('../../scripts/index')
+>>>>>>> 929a034a304cc3bb17704453a9730b8dc0592c75
 
 const configuracoes = {
   password: '12345678',
@@ -18,27 +23,14 @@ const query = (text, params = [], callback = (err, result) => { }) => {
   const start = Date.now()
   return pool.query(text, params, (err, res) => {
     const duration = Date.now() - start
-    err ? console.log('erro encontrado', err) :
+    err ? console.log(err) :
       console.log('executed query', { query: text, elapsedTime: String(duration) + ' ms', result: res.rowCount })
     callback(err, res)
   })
 }
 
-createDatabase = (callback) => {
-  return query(`
-    CREATE TABLE IF NOT EXISTS clientes (
-      id SERIAL NOT NULL PRIMARY KEY,
-      nome VARCHAR(50) NOT NULL
-    )`, [], callback
-  )
-}
-
-dropDatabase = (callback) => {
-  query(`
-    DROP TABLE IF EXISTS clientes;
-  `, [], callback)
-}
+query(queries.createTables)
 
 module.exports = {
-  query, createDatabase, dropDatabase
+  query
 }

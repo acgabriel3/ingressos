@@ -1,8 +1,9 @@
-CREATE DATABASE IF NOT EXISTS `lojas_cerradinho`;
-USE `lojas_cerradinho`;
+CREATE DATABASE lojas_cerradinho;
 
-CREATE TABLE IF NOT EXISTS `clientes` (
-  `id` SERIAL NOT NULL PRIMARY KEY,
-  `nome` VARCHAR(50) NOT NULL,
-  `senha` VARCHAR(50) NOT NULL
+CREATE TABLE IF NOT EXISTS usuarios (
+  id SERIAL NOT NULL PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  cpf VARCHAR(14) UNIQUE,
+  email VARCHAR(50) NOT NULL,
+  senha VARCHAR(100) NOT NULL
 )
