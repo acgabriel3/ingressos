@@ -1,7 +1,8 @@
-create database if not exists `lojas_cerradinho`;
-use `lojas_cerradinho`;
+CREATE DATABASE IF NOT EXISTS `lojas_cerradinho`;
+USE `lojas_cerradinho`;
 
-create table if not exists `clientes` (
-  `id` serial not null primary key,
-  `nome` varchar(50) not null
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id` SERIAL NOT NULL PRIMARY KEY,
+  `nome` VARCHAR(50) NOT NULL,
+  `senha` VARCHAR(50) NOT NULL
 )

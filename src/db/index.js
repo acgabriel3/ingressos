@@ -1,12 +1,18 @@
-const { Pool } = require('pg')
+const { mysql } = require('@mysql/xdevapi')
 
-const pool = new Pool({
-  user: 'postgres',
+const configuracoes = {
+  password: '12345678',
+  user: 'root',
   host: 'localhost',
-  database: 'lojas_cerradinho',
-  password: 'root',
-  port: 5432,
-})
+  port: 33060,
+  schema: 'lojas_cerradinho'
+};
+
+mysql
+    .getSession(configuracoes)
+    .then(session => {
+      console.log(session.inspect());
+    })
 
 const query = (text, params = [], callback = (err, result) => { }) => {
   const start = Date.now()
