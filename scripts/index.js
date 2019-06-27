@@ -4,7 +4,9 @@ module.exports = {
     CREATE TABLE  loja (
       CNPJ      INTEGER UNSIGNED PRIMARY KEY,
       nomeLoja  VARCHAR(65) NOT NULL,
-      origem    VARCHAR(65) NOT NULL);
+      origem    VARCHAR(65) NOT NULL
+    );
+
 
     CREATE TABLE departamento (
       codDep     INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -27,8 +29,8 @@ module.exports = {
 
 
     CREATE TABLE categoria (
-      codCategoria INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-      tipo     VARCHAR(65) NOT NULL
+      codCategoria  INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+      tipo          VARCHAR(65) NOT NULL
     );
 
 
