@@ -29,7 +29,7 @@ module.exports = {
 
 
     CREATE TABLE categoria (
-      codCategoria  INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+      codCat  INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
       tipo          VARCHAR(65) NOT NULL
     );
 
@@ -38,15 +38,15 @@ module.exports = {
       codProd       INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
       nomeProd      VARCHAR(65),
       preço         DOUBLE,
-      cotCategoria  INTEGER UNSIGNED REFERENCES categoria(codCategoria),
+      cotCat        INTEGER UNSIGNED REFERENCES categoria(codCat),
       copDep        INTEGER UNSIGNED REFERENCES departamento(codDep),
-      CNPJ          INTEGER UNSIGNED REFERENCES LOJA(CNPJ)
+      CNPJ          INTEGER UNSIGNED REFERENCES loja(CNPJ)
     );
 
 
     CREATE TABLE estoque (
-      codProd   INTEGER UNSIGNED REFERENCES produto(codProd),
-      CNPJ     INTEGER UNSIGNED REFERENCES LOJA(CNPJ),
+      codProd      INTEGER UNSIGNED REFERENCES produto(codProd),
+      CNPJ         INTEGER UNSIGNED REFERENCES loja(CNPJ),
       quantidade   INTEGER UNSIGNED,
       PRIMARY KEY (codProd, CNPJ)
     );
@@ -68,7 +68,7 @@ module.exports = {
 
     
     CREATE TABLE usuarios (
-      cpfUsr          INTEGER UNSIGNED REFERENCES Filme(codFilme),
+      cpfUsr          INTEGER UNSIGNED REFERENCES usuario(cpfUsr),
       nomeUsr         INTEGER UNSIGNED NOT NULL,
       senha           VARCHAR(18) NOT NULL,
       email           VARCHAR(65) NOT NULL,
@@ -92,7 +92,7 @@ module.exports = {
     CREATE TABLE favoritos (
       cpfUsr       INTEGER UNSIGNED REFERENCES usuario(cpfUsr),
       codProd      INTEGER UNSIGNED REFERENCES produto(codProd),
-      codCategoria INTEGER UNSIGNED REFERENCES categoria(codCategoria),
+      codCat       INTEGER UNSIGNED REFERENCES categoria(codCat),
       PRIMARY KEY (cpfUsr, codProd, codCategoria)
     );
          
@@ -115,7 +115,7 @@ module.exports = {
     CREATE TABLE nota_fiscal  (
       idNota       INTEGER UNSIGNED PRIMARY KEY,
       codProd      INTEGER UNSIGNED REFERENCES produto(codProd),
-      CNPJ         INTEGER UNSIGNED REFERENCES LOJA(CNPJ),
+      CNPJ         INTEGER UNSIGNED REFERENCES loja(CNPJ),
       cpfEmp       INTEGER UNSIGNED REFERENCES empregado(cpfEmp),
       cpfUsr       INTEGER UNSIGNED REFERENCES usuario(cpfUsr),
       numeroCartao INTEGER UNSIGNED REFERENCES cartao_credito(numeroCartao),
