@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='Some description')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+  body
+    - const divStyle = { "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
+    - const h1Style = { "text-align": "center", "color": "#4d4d4d", "font-size": "24px", "padding": "20px 0 20px 0" }
+    - const InputStyle = { "width": "100%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
+    - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+    div(style=divStyle)
+      h1(style=h1Style)= title
+      form(action="autentificacao/login", method="post")
+        input(type="email", name="email" autocomplete="off" placeholder="e-mail" required style=InputStyle)
+        input(type="password", name="password" placeholder="senha" required style=InputStyle)
+        input(type="submit", value="Entrar" style=submitStyle)
+      form(action="/autentificacao/cadastro")
+        input(type="submit" value="Registrar-se" style=submitStyle)

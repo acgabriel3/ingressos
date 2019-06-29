@@ -1,1 +1,0 @@
-// como coloca scripts JS no arquivo html?????

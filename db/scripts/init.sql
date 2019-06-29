@@ -1,0 +1,37 @@
+CREATE TABLE IF NOT EXISTS Pessoa (
+  cpf DECIMAL(12) UNIQUE PRIMARY KEY NOT NULL,
+  nome VARCHAR(50) NOT NULL,
+  telefone VARCHAR(10),
+  dt_nascimento DATE,
+  cep VARCHAR(20),
+  numero_casa INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS Cliente (
+  email VARCHAR(50) UNIQUE PRIMARY KEY NOT NULL,
+  cpf DECIMAL(12) UNIQUE,
+  senha VARCHAR(100) NOT NULL,
+  FOREIGN KEY (cpf) REFERENCES Pessoa(cpf)
+);
+
+CREATE TABLE IF NOT EXISTS Departamento (
+  codigo SERIAL PRIMARY KEY NOT NULL,
+  nome VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS CartaoCredito (
+  numero VARCHAR(15) PRIMARY KEY NOT NULL,
+  dt_vencimento DATE NOT NULL,
+  cvc DECIMAL(3) NOT NULL,
+  titular DECIMAL(12) NOT NULL,
+  FOREIGN KEY (titular) REFERENCES Pessoa(cpf)
+);
+
+CREATE TABLE IF NOT EXISTS Empregado (
+  matricula VARCHAR(10) UNIQUE PRIMARY KEY NOT NULL,
+  cpf DECIMAL(12) UNIQUE,
+  salario REAL NOT NULL,
+  dt_contrato DATE NOT NULL,
+  departamento INTEGER NOT NULL,
+  FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
+);

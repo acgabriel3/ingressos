@@ -1,11 +1,11 @@
 {
-  "name": "lojas-cerradinho",
-  "version": "1.0.0",
+  "name": "lojascerradinho",
+  "version": "0.0.0",
+  "private": true,
   "description": "trabalho de banco de dados 2019.1",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/server.js"
+    "start": "nodemon ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,13 @@
   },
   "homepage": "https://github.com/acgabriel3/ingressos#readme",
   "dependencies": {
-    "@mysql/xdevapi": "^8.0.16",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "express-session": "^1.16.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
     "nodemon": "^1.19.1",
-    "pg": "^7.11.0"
+    "pg": "^7.11.0",
+    "pug": "2.0.0-beta11"
   }
 }
