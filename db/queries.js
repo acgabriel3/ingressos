@@ -27,5 +27,15 @@ module.exports = {
           throw error
         }
       })
+  },
+  createCartao: (request, response) => {
+    const { numero, dt_vencimento, cvc, titular } = request.body
+    db.query(`INSERT INTO CartaoCredito (numero, dt_vencimento, cvc, titular)
+      values ($1, $2, $3, $4)`, [numero, dt_vencimento, cvc, titular],
+      (error, results) => {
+        if (error) {
+          throw error
+        }
+      })
   }
 }

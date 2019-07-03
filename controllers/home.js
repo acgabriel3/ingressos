@@ -1,7 +1,7 @@
 const db = require('../db/index')
 
 exports.displayHome = (req, res, next) => {
-	db.query(`SELECT p.nome, c.nome AS nome_categoria FROM Produto AS p NATURAL JOIN Categoria AS c`
+	db.query(`SELECT p.nome, c.nome AS nome_categoria FROM Produto AS p INNER JOIN Categoria AS c ON p.c_codigo = c.c_codigo`
 		, [], (err, result) => {
 		if (err) {
 			throw err

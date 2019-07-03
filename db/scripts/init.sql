@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS CartaoCredito (
 );
 
 CREATE TABLE IF NOT EXISTS Loja (
-	cnpj 		VARCHAR(15) UNIQUE PRIMARY KEY NOT NULL,
+	cnpj 		SERIAL UNIQUE PRIMARY KEY NOT NULL,
 	nome 		VARCHAR(50) UNIQUE NOT NULL,
 	cep 		VARCHAR(20),
  	numero_lote INTEGER
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Produto (
 );
 
 CREATE TABLE IF NOT EXISTS Estoque (
-	codigo 		   SERIAL REFERENCES Produto(codigo),
+	codigo 		   INTEGER REFERENCES Produto(codigo),
 	nome 		   VARCHAR(45) REFERENCES Loja(nome),
 	quantidade 	   INTEGER,
 	PRIMARY KEY (codigo, nome)
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS NotaFiscal (
 	id_nota 	 SERIAL PRIMARY KEY NOT NULL,
 	id_compra	 INTEGER REFERENCES Compra(id_compra),
 	cpf 		 VARCHAR(15) REFERENCES Cliente(cpf),
-	cnpj 		 VARCHAR(15) REFERENCES Loja(cnpj),
+	cnpj 		 INTEGER REFERENCES Loja(cnpj),
 	codigo       INTEGER REFERENCES Cupom(codigo),
 	valor_total  REAL,
 	dt_emissao   TIMESTAMPTZ NOT NULL DEFAULT NOW()	
