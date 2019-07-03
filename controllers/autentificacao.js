@@ -2,14 +2,14 @@ const db = require('../db/index')
 
 exports.cadastroHandler = (request, response, next) => {
   const { nome, cpf, email, password } = request.body
-  db.query('INSERT INTO usuarios (nome, cpf, email, senha) VALUES($1, $2, $3, $4)',
+  db.query('INSERT INTO Cliente (nome, cpf, email, senha) VALUES($1, $2, $3, $4)',
     [nome, cpf, email, password])
   response.redirect('../../')
 }
 
 exports.loginHandler = (request, response, next) => {
   const { email, password } = request.body
-  db.query('SELECT * FROM usuarios WHERE email = $1',
+  db.query('SELECT * FROM Cliente WHERE email = $1',
     [email], (err, result) => {
       if (err) {
         response.send(err)
