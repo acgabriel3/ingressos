@@ -1,7 +1,7 @@
 const queries = require('../db/queries')
 
 exports.getUsers = (req, res, next) => {
-  queries.getPersons(req, res)
+  queries.getClients(req, res)
 }
 
 exports.getUserInfo = (req, res, next) => {
@@ -11,4 +11,8 @@ exports.getUserInfo = (req, res, next) => {
 exports.createUser = (req, res, next) => {
   queries.createPerson(req, res)
   res.redirect('../../')
+}
+
+exports.renderProfile = (req, res, next) => {
+	queries.getClients(req, res)
 }

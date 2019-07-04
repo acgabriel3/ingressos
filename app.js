@@ -3,11 +3,13 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const session = require('express-session')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/userRoutes')
 const authRouter = require('./routes/authRoutes/index')
 const homeRouter = require('./routes/homeRoutes/index')
+
 
 const app = express()
 
@@ -25,6 +27,17 @@ app.use('/', indexRouter)
 app.use('/usuarios', usersRouter)
 app.use('/autentificacao', authRouter)
 app.use('/home', homeRouter)
+
+app.use(session({
+  name: 'sid',
+	secret: 'secret',
+	resave: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 2,
+    sameSite: true
+  }
+}));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

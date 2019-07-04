@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS Cliente (
   	telefone 	  VARCHAR(20),
   	dt_nascimento DATE,
   	cep   		  VARCHAR(20),
-  	numero_casa   INTEGER
+  	numero_casa   INTEGER,
+  	foto 		  BYTEA
 );
 
 CREATE TABLE IF NOT EXISTS Departamento (

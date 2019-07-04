@@ -5,23 +5,24 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='description', content='Some description')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-  body
+  body(style="background-image:url('https://img.elo7.com.br/product/original/206462E/papel-de-parede-casual-azul-clarinho-papel-de-parede-areas-externas.jpg');")
     - const divStyle = { "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
     - const h1Style = { "text-align": "center", "color": "#4d4d4d", "font-size": "24px", "padding": "20px 0 20px 0" }
-    - const InputStyle = { "width": "100%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
+    - const InputStyleBig = { "width": "100%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
+    - const InputStyleSmall = { "width": "50%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
     - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     - const submitVoltarStyle = { "width": "100%", "padding": "15px"," background-color": "#f08080", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     div(style=divStyle)
       h1(style=h1Style)= "Preencha os Campos Abaixo"
       form(action="/usuarios", method="post")
-        input(type="text", name="cpf"  placeholder="CPF" required style=InputStyle)
-        input(type="text", name="nome"  placeholder="nome" required style=InputStyle)
-        input(type="email", name="email"  placeholder="e-mail" required style=InputStyle)
-        input(type="password", name="senha"  placeholder="senha (mínimo 8 caracteres)" required style=InputStyle)
-        input(type="text", name="telefone"  placeholder="telefone" required style=InputStyle)
-        input(type="date", name="dt_nascimento"  placeholder="data nascimento (YYYY-MM-DD)" required style=InputStyle)
-        input(type="text", name="cep"  placeholder="CEP" required style=InputStyle)
-        input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyle)
+        input(type="text", name="cpf"  placeholder="CPF" required style=InputStyleBig)
+        input(type="text", name="nome"  placeholder="nome" required style=InputStyleBig)
+        input(type="email", name="email"  placeholder="e-mail" required style=InputStyleBig)
+        input(type="password", name="senha"  placeholder="senha (mínimo 8 caracteres)" required style=InputStyleBig)
+        input(type="text", name="telefone"  placeholder="telefone" required style=InputStyleBig)
+        input(type="date", name="dt_nascimento"  placeholder="data nascimento (YYYY-MM-DD)" required style=InputStyleBig)
+        input(type="text", name="cep"  placeholder="CEP" required style=InputStyleSmall)
+        input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyleSmall)
         input(type="submit", value="Cadastrar" style=submitStyle)
       form(action="../")
         input(type="submit" value="Voltar" style=submitVoltarStyle )

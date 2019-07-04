@@ -1,7 +1,7 @@
 const db = require('./index')
 
 module.exports = {
-  getPersons: (request, response) => {
+  getClients: (request, response) => {
     db.query(`SELECT * FROM Cliente`, (error, results) => {
       if (error) {
         throw error
