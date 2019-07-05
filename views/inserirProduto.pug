@@ -14,16 +14,23 @@ html
     - const submitVoltarStyle = { "width": "100%", "padding": "15px"," background-color": "#f08080", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     div(style=divStyle)
       h1(style=h1Style)= "Preencha os Campos Abaixo"
-      form(action="/usuarios", method="post" enctype="multipart/form-data")
-        input(type="text", name="cpf"  placeholder="CPF" required style=InputStyleBig)
-        input(type="text", name="nome"  placeholder="nome" required style=InputStyleBig)
-        input(type="email", name="email"  placeholder="e-mail" required style=InputStyleBig)
-        input(type="password", name="senha"  placeholder="senha (mínimo 8 caracteres)" required style=InputStyleBig)
-        input(type="text", name="telefone"  placeholder="telefone" required style=InputStyleBig)
-        input(type="text", name="dt_nascimento"  placeholder="data nascimento (YYYY-MM-DD)" required style=InputStyleBig)
-        input(type="text", name="cep"  placeholder="CEP" required style=InputStyleSmall)
-        input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyleSmall)
+      form(action="/produtos/inserir", method="post" enctype="multipart/form-data")
+        input(type="text", name="nome"  placeholder="Nome" required style=InputStyleBig autocomplete="off")
+        input(type="number", name="preco"  placeholder="Preço" required style=InputStyleBig autocomplete="off")
+        h3= "Selecione uma categoria"
+        each cat in categorias
+          label= cat.nome
+            input(type="checkbox" name="categoria" value=`${cat.codigo}`)
+          br
+        h3= "Selecione uma loja fornecedora"
+        each loja in lojas
+          label= loja.nome
+            input(type="checkbox" name="loja" value=`${loja.nome}`) 
+          br
+        br
+        input(type="number" name="quantidade" placeholder="Quantidade" required style=InputStyleBig)
+        br
         input(type="file", name="foto"  placeholder="foto de perfil" accept="image/*" required style=InputStyleBig)
-        input(type="submit", value="Cadastrar" style=submitStyle)
-      form(action="../")
+        input(type="submit", value="Cadastrar Produto" style=submitStyle)
+      form(action="/produtos")
         input(type="submit" value="Voltar" style=submitVoltarStyle )

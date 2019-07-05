@@ -16,8 +16,8 @@ html
     include navheader.pug
     
     div(style=divStyle)
-      h1(style=h1Style)= "Para editar, preencha todos os campos abaixo"
-      form(action="/usuarios", method="post")
+      h1(style=h1Style)= "Para editar, preencha os campos abaixo"
+      form(action="/usuarios/editPerfil", method="post" enctype="multipart/form-data")
         input(type="text", name="nome"  placeholder="nome" required style=InputStyleBig)
         input(type="email", name="email"  placeholder="e-mail" required style=InputStyleBig)
         input(type="password", name="senha"  placeholder="senha (mínimo 8 caracteres)" required style=InputStyleBig)

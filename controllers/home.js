@@ -14,3 +14,7 @@ exports.displayHome = (req, res, next) => {
 			})
 		})
 }
+
+exports.renderHistoria = (req, res, next) => {
+	res.render('historia')
+}

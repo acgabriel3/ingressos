@@ -7,6 +7,12 @@ html
   - const divStyle = { "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
   - const h1Style = { "text-align": "center", "color": "#4d4d4d", "font-size": "24px", "padding": "20px 0 20px 0" }
   - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+  - const imgContainer = { "display": "flex", "width": "200px", "height": "200px", "overflow": "hidden", "border-radius": "50%", "z-index": "1", "justify-content": "center" }
+  - const imgStyle = { "width": "auto", "height": "100%"}
+
+  div(align='center')
+      div(align='center' style=imgContainer)
+        img(src=`${produto.foto}` style=imgStyle)
 
   p(align='center')
     var= produto.produto

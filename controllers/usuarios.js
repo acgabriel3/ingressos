@@ -22,7 +22,8 @@ exports.getUserInfo = (req, res, next) => {
 
 
 exports.createUser = (req, res, next) => {
-  const { cpf, nome, email, senha, telefone, dt_nascimento, cep, num_casa, foto } = req.body
+  const { cpf, nome, email, senha, telefone, dt_nascimento, cep, num_casa } = req.body
+  const foto = req.file.buffer.toString('base64')
   db.query(`INSERT INTO Cliente (cpf, nome, email, senha, telefone, dt_nascimento, cep, numero_casa, foto)
       values ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
     [cpf, nome, email, senha, telefone, dt_nascimento, cep, num_casa, foto], (error, results) => {
@@ -38,7 +39,8 @@ exports.renderEditPerfil = (req, res, next) => {
 }
 
 exports.updateUser = (req, res, next) => {
-  const { nome, email, senha, telefone, dt_nascimento, cep, num_casa, foto } = req.body
+  const { nome, email, senha, telefone, dt_nascimento, cep, num_casa } = req.body
+  const foto = req.file.buffer.toString('base64')
   db.query(`UPDATE Cliente SET nome = $1, email = $2, senha = $3, telefone = $4,
     dt_nascimento = $5, cep = $6, numero_casa = $7, foto = $8 WHERE cpf = $9`,
     [nome, email, senha, telefone, dt_nascimento, cep, num_casa, foto, req.session.usuarioAtivo.cpf],

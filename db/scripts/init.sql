@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS Empregado (
   	salario 	  REAL NOT NULL,
   	dt_contrato   DATE NOT NULL,
   	departamento  INTEGER NOT NULL,
+	foto 		  BYTEA,
   	FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
 );
 
@@ -44,23 +45,25 @@ CREATE TABLE IF NOT EXISTS CartaoCredito (
 );
 
 CREATE TABLE IF NOT EXISTS Loja (
-	cnpj 		SERIAL UNIQUE PRIMARY KEY NOT NULL,
-	nome 		VARCHAR(50) UNIQUE NOT NULL,
-	cep 		VARCHAR(20),
- 	numero_lote INTEGER
+	cnpj 			SERIAL UNIQUE PRIMARY KEY NOT NULL,
+	nome 			VARCHAR(50) UNIQUE NOT NULL,
+	cep 			VARCHAR(20),
+ 	numero_lote		INTEGER,
+	logo 		  	BYTEA
 );
 
 CREATE TABLE IF NOT EXISTS Categoria (
-	c_codigo SERIAL PRIMARY KEY NOT NULL,
-	nome   VARCHAR(45)
+	c_codigo 	SERIAL PRIMARY KEY NOT NULL,
+	nome   		VARCHAR(45)
 );
 
 CREATE TABLE IF NOT EXISTS Produto (
-	codigo 			 SERIAL PRIMARY KEY NOT NULL,
-	nome 			 VARCHAR(45),
-	preco 			 REAL,
-	promocao         BOOLEAN,
-	c_codigo 		 INTEGER REFERENCES Categoria(c_codigo)
+	codigo 		SERIAL PRIMARY KEY NOT NULL,
+	nome 		VARCHAR(45),
+	preco 		REAL,
+	promocao    BOOLEAN,
+	foto 		BYTEA,
+	c_codigo 	INTEGER REFERENCES Categoria(c_codigo)
 );
 
 CREATE TABLE IF NOT EXISTS Estoque (
@@ -72,7 +75,7 @@ CREATE TABLE IF NOT EXISTS Estoque (
 
 CREATE TABLE IF NOT EXISTS Favoritos (
 	cpf		VARCHAR(15) REFERENCES Cliente(cpf),
-	codigo 	INTEGER REFERENCES Produto(codigo),
+	codigo 	INTEGER REFERENCES Produto(codigo),  
 	PRIMARY KEY (cpf, codigo)
 );	
 
@@ -85,10 +88,10 @@ CREATE TABLE IF NOT EXISTS Compra (
 );	
 
 CREATE TABLE IF NOT EXISTS Cupom (
-	codigo 		SERIAL PRIMARY KEY NOT NULL,
-	valor 		INTEGER CHECK (valor > 0 AND valor < 30),
-	dt_validade DATE,
-	prod_desconto INTEGER REFERENCES Produto(codigo)
+	codigo 			SERIAL PRIMARY KEY NOT NULL,
+	valor 			INTEGER CHECK (valor > 0 AND valor < 30),
+	dt_validade 	DATE,
+	prod_desconto 	INTEGER REFERENCES Produto(codigo)
 );
 
 CREATE TABLE IF NOT EXISTS NotaFiscal (
@@ -105,3 +108,10 @@ CREATE TABLE IF NOT EXISTS NF_Produtos (
 	codigo   INTEGER REFERENCES Produto(codigo),
 	id_nota  INTEGER REFERENCES NotaFiscal(id_nota)
 );
+
+CREATE VIEW infoProduto AS
+
+	SELECT e.codigo AS codigo, e.nome AS loja_fornecedora, e.quantidade AS estoque,
+    p.nome AS produto, p.preco AS preco, c.valor AS desconto, c.codigo As codCupom
+    FROM (Estoque AS e INNER JOIN Produto AS p ON e.codigo = p.codigo) INNER JOIN Cupom AS c
+	on c.prod_desconto = p.codigo;

@@ -2,23 +2,25 @@ doctype html
 html
   head
   body(style="background-image:url('https://img.elo7.com.br/product/original/206462E/papel-de-parede-casual-azul-clarinho-papel-de-parede-areas-externas.jpg');")
-
+  
     include navheader.pug
 
-    table(style='width:100%', border='1')
-      tr
-        th Produto
-        th Codigo
-        th Preço
-        th Categoria
-        th Loja Fornecedora
-        th Estoque
-      each prod in produtos 
-        tr
-          td
-            a(href=`/produtos/${prod.codigo}`)= prod.produto
-          td= prod.codigo
-          td= prod.preco
-          td= prod.categoria
-          td= prod.loja_fornecedora
-          td= prod.estoque
+    - const imgContainer = { "display": "flex", "width": "100px", "height": "100px", "overflow": "hidden", "border-radius": "50%", "z-index": "1", "justify-content": "center" }
+    - const imgStyle = { "width": "auto", "height": "100%"}
+    - const itemBox = { "width": "300px", "height": "190px", "border": "1px solid #000", "padding-top": "15px" }
+    - const btnStyle = { "background-color": "#4CAF50", "border": "none", "color": "white", "padding": "15px 32px", "text-align": "center", "text-decoration": "none", "display": "inline-block", "font-size": "16px" }
+
+      div(align='center')
+        form(action="/produtos/inserir" method="get")
+          input(type="submit" value="Novo Produto" style=btnStyle)
+      br
+      br
+      div(align='center')
+        each prod in produtos
+          div(style=itemBox)
+            div(style=imgContainer)
+              img(src=`${prod.foto}` style=imgStyle)
+            a(href=`/produtos/${prod.codigo}`)
+              p= prod.produto
+            p= `R$ ${prod.preco}`
+          br
