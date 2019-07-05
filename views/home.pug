@@ -1,42 +1,15 @@
 doctype html
 html
   head
-  body(style="background-image:url('https://img.elo7.com.br/product/original/206462E/papel-de-parede-casual-azul-clarinho-papel-de-parede-areas-externas.jpg');")
+  body
+    include navheader.pug
 
-    style
-      include navbar.css
-
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light 
-      
-      .collapse.navbar-collapse(id='navbarSupportedContent')
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/home') Home
-          li.nav-item
-            a.nav-link(href='/usuarios/perfil') Perfil
-          li.nav-item
-            a.nav-link(href='/parking') Produtos
-          li.nav-item
-            a.nav-link(href='/places') Sobre nós
-          li.nav-item
-            a.nav-link(href='/login') Settings
-          li(style='float:right').nav-item
-            a.nav-link(href='/') Logout        
-
-    table(style='width:100%', border='1')
-      tr
-          th Produto
-          th Codigo
-          th Preço
-          th Categoria
-          th Loja Fornecedora
-          th Estoque
-      each prod in produtos      
-        tr    
-          td= prod.produto
-          td= prod.codigo
-          td= prod.preco
-          td= prod.categoria
-          td= prod.loja_fornecedora
-          td= prod.estoque 
-          
+    h1= "Bem vindo a Loja Cerradinho"
+    h3= " Aproveite os produtos em promoção, com 30% de desconto e gaste todas as suas economias com a lógica consumista capitalista"
+  
+    table(style='width:30%', border='1')
+    
+      each prod in produtos
+        tr(align='center')   
+          td
+            a(href=`/produtos/${prod.codigo}`)= prod.produto

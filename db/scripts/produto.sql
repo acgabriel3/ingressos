@@ -13,8 +13,8 @@ INSERT INTO Categoria (nome)
 
 
 -- Produos eletronicos OpenBox
-INSERT INTO Produto (nome, preco, c_codigo)
-	values('SSD Kingston A400, 240GB, SATA', 172.90, 1);
+INSERT INTO Produto (nome, preco, c_codigo, promocao)
+	values('SSD Kingston A400, 240GB, SATA', 172.90, 1, TRUE);
 
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('Memória HyperX Fury, 8GB, 2400MHz, DDR4', 226.90, 1);
@@ -33,22 +33,22 @@ INSERT INTO Produto (nome, preco, c_codigo)
 
 
 -- Produtos eletronicos GFallen
-INSERT INTO Produto (nome, preco, c_codigo)
-	values('Teclado Falcãozinho', 432.50, 1);
+INSERT INTO Produto (nome, preco, c_codigo, promocao)
+	values('Teclado Falcãozinho', 432.50, 1, TRUE);
 
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('Mouse Lobo', 350.00, 1);
 
-INSERT INTO Produto (nome, preco, c_codigo)
-	values('Mousepad Pantera', 95.50, 1);
+INSERT INTO Produto (nome, preco, c_codigo, promocao)
+	values('Mousepad Pantera', 95.50, 1, TRUE);
 
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('Mouse Bungee Tucano', 87.99, 1);
 
 
 -- Pordutos ecolares Fabricio Castelo
-INSERT INTO Produto (nome, preco, c_codigo)
-	values('Borracha Grip 2001', 7.99, 2);
+INSERT INTO Produto (nome, preco, c_codigo, promocao)
+	values('Borracha Grip 2001', 7.99, 2, TRUE);
 
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('Cola Colorida 6 cores 23g', 5.50, 2);
@@ -70,8 +70,8 @@ INSERT INTO Produto (nome, preco, c_codigo)
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('Boneco Articulado - Luccas Neto ', 159.99, 3);
 
-INSERT INTO Produto (nome, preco, c_codigo)
-	values('Boneca Barbie - Bailarina', 32.99, 3);
+INSERT INTO Produto (nome, preco, c_codigo, promocao)
+	values('Boneca Barbie - Bailarina', 32.99, 3, TRUE);
 
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('Lança Dardos - Nerf', 64.50, 3);
@@ -79,10 +79,5 @@ INSERT INTO Produto (nome, preco, c_codigo)
 INSERT INTO Produto (nome, preco, c_codigo)
 	values('LEGO Classic - Engrenagens e Rodas', 179.95, 3);
 
-INSERT INTO Produto (nome, preco, c_codigo)
-	values('LEGO Juniors - Jurassic World', 127.90, 3);
-
-
-						
-
-
+INSERT INTO Produto (nome, preco, c_codigo, promocao)
+	values('LEGO Juniors - Jurassic World', 127.90, 3, TRUE);

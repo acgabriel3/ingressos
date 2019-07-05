@@ -16,7 +16,10 @@ root
 root
 create database lojas_cerradinho;
 \c lojas_cerradinho
+\i db/scripts/end.sql
 \i db/scripts/init.sql
+\i db/scripts/produto.sql
+\i db/scripts/estoque.sql
 \q
 ```
 

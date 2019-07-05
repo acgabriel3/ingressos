@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS Cliente (
   	email   	  VARCHAR(50) UNIQUE,
   	senha   	  VARCHAR(100) NOT NULL,
   	telefone 	  VARCHAR(20),
-  	dt_nascimento DATE,
+  	dt_nascimento VARCHAR(15),
   	cep   		  VARCHAR(20),
   	numero_casa   INTEGER,
   	foto 		  BYTEA
@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS Produto (
 	codigo 			 SERIAL PRIMARY KEY NOT NULL,
 	nome 			 VARCHAR(45),
 	preco 			 REAL,
+	promocao         BOOLEAN,
 	c_codigo 		 INTEGER REFERENCES Categoria(c_codigo)
 );
 
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS Compra (
 
 CREATE TABLE IF NOT EXISTS Cupom (
 	codigo 		SERIAL PRIMARY KEY NOT NULL,
-	valor 		REAL,
+	valor 		INTEGER CHECK (valor > 0 AND valor < 30),
 	dt_validade DATE
 );
 
@@ -103,5 +104,3 @@ CREATE TABLE IF NOT EXISTS NF_Produtos (
 	codigo   INTEGER REFERENCES Produto(codigo),
 	id_nota  INTEGER REFERENCES NotaFiscal(id_nota)
 );
-
-
