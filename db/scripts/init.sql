@@ -87,7 +87,8 @@ CREATE TABLE IF NOT EXISTS Compra (
 CREATE TABLE IF NOT EXISTS Cupom (
 	codigo 		SERIAL PRIMARY KEY NOT NULL,
 	valor 		INTEGER CHECK (valor > 0 AND valor < 30),
-	dt_validade DATE
+	dt_validade DATE,
+	prod_desconto INTEGER REFERENCES Produto(codigo)
 );
 
 CREATE TABLE IF NOT EXISTS NotaFiscal (
