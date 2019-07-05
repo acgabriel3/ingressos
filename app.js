@@ -9,7 +9,7 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/userRoutes')
 const authRouter = require('./routes/authRoutes/index')
 const homeRouter = require('./routes/homeRoutes/index')
-
+const productsRouter = require('./routes/productsRoutes/index')
 
 const app = express()
 
@@ -22,30 +22,27 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+  secret: 'keyboard cat',
+  cookie: { maxAge: 6000 * 60 * 60 * 60 * 2 },
+  usuarioAtivo: {},
+  saveUninitialized: true,
+  resave: true
+}))
 
 app.use('/', indexRouter)
 app.use('/usuarios', usersRouter)
+app.use('/produtos', productsRouter)
 app.use('/autentificacao', authRouter)
 app.use('/home', homeRouter)
 
-app.use(session({
-  name: 'sid',
-	secret: 'secret',
-	resave: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 2,
-    sameSite: true
-  }
-}));
-
-
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404))
 })
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}

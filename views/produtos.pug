@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+  body(style="background-image:url('https://img.elo7.com.br/product/original/206462E/papel-de-parede-casual-azul-clarinho-papel-de-parede-areas-externas.jpg');")
+
+    include navheader.pug
+
+    table(style='width:100%', border='1')
+      tr
+        th Produto
+        th Codigo
+        th Preço
+        th Categoria
+        th Loja Fornecedora
+        th Estoque
+      each prod in produtos 
+        tr
+          td
+            a(href=`/produtos/${prod.codigo}`)= prod.produto
+          td= prod.codigo
+          td= prod.preco
+          td= prod.categoria
+          td= prod.loja_fornecedora
+          td= prod.estoque

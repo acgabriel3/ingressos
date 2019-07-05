@@ -1,29 +1,19 @@
 const db = require('../db/index')
 
-exports.cadastroHandler = (request, response, next) => {
-  const { nome, cpf, email, password } = request.body
-  db.query('INSERT INTO Cliente (nome, cpf, email, senha) VALUES($1, $2, $3, $4)',
-    [nome, cpf, email, password])
-  response.redirect('../../')
-}
-
-exports.loginHandler = (request, response, next) => {
-  const { email, password } = request.body
-  db.query('SELECT * FROM Cliente WHERE email = $1',
-    [email], (err, result) => {
-      if (err) {
-        response.send(err)
-      } else if (result.rows.length == 0) {
-        response.send('Usuário não cadastrado')
-      } else if (result.rows[0].senha != password) {
-        response.send('Senha incorreta')
-      } else {
-        // request.session.loggedin = true
-        // request.session.username = email 
-        response.redirect('/home')
-      }
+exports.loginHandler = (req, res, next) => {
+  const { email, password } = req.body
+  db.query(`SELECT * from Cliente where email = $1`, [email], (error, result) => {
+    if (error) {
+      throw error
+    } else if (result.rows.length == 0) {
+      res.send('Usuário não cadastrado')
+    } else if (result.rows[0].senha != password) {
+      res.send('Senha incorreta')
+    } else {
+      req.session.usuarioAtivo = result.rows[0]
+      res.redirect('/home')
     }
-  )
+  })
 }
 
 exports.displayRegisterPage = (req, res, next) => {

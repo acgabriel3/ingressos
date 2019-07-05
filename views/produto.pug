@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+  body
+    include navheader.pug
+
+  - const divStyle = { "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
+  - const h1Style = { "text-align": "center", "color": "#4d4d4d", "font-size": "24px", "padding": "20px 0 20px 0" }
+  - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+
+  p(align='center')
+    var= produto.produto
+
+  p(align='center')
+    b código:
+    var= produto.codigo
+  
+  p(align='center')
+    b preço:
+    var= produto.preco
+
+  p(align='center')
+    b categoria:
+    var= produto.categoria
+
+  p(align='center')
+    b fornecedor:
+    var= produto.loja_fornecedora
+
+  p(align='center')
+    b estoque:
+    var= produto.estoque
+
+  div(style=divStyle)
+    form(action="/produtos/compra")
+      input(type="submit" value="Comprar" style=submitStyle)
+
+

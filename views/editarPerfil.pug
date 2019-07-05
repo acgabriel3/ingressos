@@ -12,10 +12,12 @@ html
     - const InputStyleSmall = { "width": "50%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
     - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     - const submitVoltarStyle = { "width": "100%", "padding": "15px"," background-color": "#f08080", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+    
+    include navheader.pug
+    
     div(style=divStyle)
-      h1(style=h1Style)= "Preencha os Campos Abaixo"
+      h1(style=h1Style)= "Para editar, preencha todos os campos abaixo"
       form(action="/usuarios", method="post")
-        input(type="text", name="cpf"  placeholder="CPF" required style=InputStyleBig)
         input(type="text", name="nome"  placeholder="nome" required style=InputStyleBig)
         input(type="email", name="email"  placeholder="e-mail" required style=InputStyleBig)
         input(type="password", name="senha"  placeholder="senha (mínimo 8 caracteres)" required style=InputStyleBig)
@@ -24,6 +26,6 @@ html
         input(type="text", name="cep"  placeholder="CEP" required style=InputStyleSmall)
         input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyleSmall)
         input(type="file", name="foto"  placeholder="foto de perfil" accept="image/*" required style=InputStyleBig)
-        input(type="submit", value="Cadastrar" style=submitStyle)
-      form(action="../")
+        input(type="submit", value="Editar" style=submitStyle)
+      form(action="/usuarios/perfil")
         input(type="submit" value="Voltar" style=submitVoltarStyle )

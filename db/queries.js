@@ -1,41 +1,69 @@
 const db = require('./index')
+const fs = require('fs')
+
+createSchema = () => {
+  fs.readFile('./db/scripts/init.sql', (err, data) => {
+    if (err) {
+      throw err
+    }
+
+    db.query(data.toString(), [], (err, result) => {
+      if (err) {
+        throw err
+      }
+      console.log('Schema criado com sucesso')
+    })
+  })
+}
+
+dropSchema = () => {
+  fs.readFile('./db/scripts/end.sql', (err, data) => {
+    if (err) {
+      throw err
+    }
+
+    db.query(data.toString(), [], (err, result) => {
+      if (err) {
+        throw err
+      }
+      console.log('Schema dropado com sucesso')
+    })
+  })
+}
+
+insertProducts = () => {
+  fs.readFile('./db/scripts/produto.sql', (err, data) => {
+    if (err) {
+      throw err
+    }
+
+    db.query(data.toString(), [], (err, result) => {
+      if (err) {
+        throw err
+      }
+      console.log('produtos inseridos com sucesso')
+    })
+  })
+}
+
+createStock = () => {
+  fs.readFile('./db/scripts/estoque.sql', (err, data) => {
+    if (err) {
+      throw err
+    }
+
+    db.query(data.toString(), [], (err, result) => {
+      if (err) {
+        throw err
+      }
+      console.log('estoque criado com sucesso')
+    })
+  })
+}
 
 module.exports = {
-  getClients: (request, response) => {
-    db.query(`SELECT * FROM Cliente`, (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.json(results.rows)
-    })
-  },
-  getPersonByCPF: (request, response) => {
-    const cpf = parseInt(request.params.cpf)
-    db.query(`SELECT * from Cliente where cpf = $1`, [cpf], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.json(results.rows)
-    })
-  },
-  createPerson: (request, response) => {
-    const { cpf, nome, email, senha, telefone, dt_nascimento, cep, num_casa } = request.body
-    db.query(`INSERT INTO Cliente (cpf, nome, email, senha, telefone, dt_nascimento, cep, numero_casa)
-      values ($1, $2, $3, $4, $5, $6, $7, $8)`, [cpf, nome, email, senha, telefone, dt_nascimento, cep, num_casa],
-      (error, results) => {
-        if (error) {
-          throw error
-        }
-      })
-  },
-  createCartao: (request, response) => {
-    const { numero, dt_vencimento, cvc, titular } = request.body
-    db.query(`INSERT INTO CartaoCredito (numero, dt_vencimento, cvc, titular)
-      values ($1, $2, $3, $4)`, [numero, dt_vencimento, cvc, titular],
-      (error, results) => {
-        if (error) {
-          throw error
-        }
-      })
-  }
+  dropSchema,
+  createSchema,
+  insertProducts,
+  createStock
 }
