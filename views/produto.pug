@@ -12,7 +12,7 @@ html
 
   div(align='center')
       div(align='center' style=imgContainer)
-        img(src=`${produto.foto}` style=imgStyle)
+        img(src=`data:image/jpeg;base64,${produto.foto}` style=imgStyle)
 
   p(align='center')
     var= produto.produto
@@ -38,7 +38,5 @@ html
     var= produto.estoque
 
   div(style=divStyle)
-    form(action="/produtos/compra")
+    a(href=`/produtos/${produto.codigo}/compra`)
       input(type="submit" value="Comprar" style=submitStyle)
-
-

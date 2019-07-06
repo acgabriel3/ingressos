@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+  body
+    include navheader.pug
+
+
+  - const divStyle = { "display": "inline-block", "top": "0", "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
+  - const itemBox = { "width": "250px", "height": "200px", "border": "1px solid #000", "padding-top": "15px", "background": "#768b8f" }
+  - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#5234ea", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+  - const numStyle = { "font-size": "16px", "border": "1px solid black", "width": "90%", "background": "#ff1a8b"  }
+  - const voltarDivStyle = { "position": "fixed", "display": "inline-block", "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
+  - const voltarStyle = { "width": "100%", "padding": "15px"," background-color": "#ff8010", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+
+    div(style=voltarDivStyle)
+      div(style=divStyle)
+        form(action="/usuarios/cartoes/adicionar")
+          input(type="submit" value="Adicionar Cartão" style=submitStyle)
+        a(href="/usuarios/cartoes/excluir")
+          input(type="submit" value="Excluir Cartão" style=submitStyle)
+        a(href="/usuarios/perfil")
+          input(type="submit" value="Voltar" style=voltarStyle)
+    br
+    div(align='center')
+      each cartao in cartoes
+        div(style=itemBox)
+          b= "Número"
+          h2(style=numStyle)= cartao.numero
+          b= "CVC"
+          p= cartao.cvc
+          b= "Data de Validade"
+          p= cartao.dt_vencimento
+        br

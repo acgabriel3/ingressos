@@ -9,23 +9,14 @@ html
     - const divStyle = { "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
     - const h1Style = { "text-align": "center", "color": "#4d4d4d", "font-size": "24px", "padding": "20px 0 20px 0" }
     - const InputStyleBig = { "width": "100%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
-    - const InputStyleSmall = { "width": "50%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
     - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     - const submitVoltarStyle = { "width": "100%", "padding": "15px"," background-color": "#f08080", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
-    
-    include navheader.pug
-    
     div(style=divStyle)
-      h1(style=h1Style)= "Para editar, preencha os campos abaixo"
-      form(action="/usuarios/perfil/editar", method="post" enctype="multipart/form-data")
-        input(type="text", name="nome"  placeholder="nome" required style=InputStyleBig)
-        input(type="email", name="email"  placeholder="e-mail" required style=InputStyleBig)
-        input(type="password", name="senha"  placeholder="senha (mínimo 8 caracteres)" required style=InputStyleBig)
-        input(type="text", name="telefone"  placeholder="telefone" required style=InputStyleBig)
-        input(type="text", name="dt_nascimento"  placeholder="data nascimento (YYYY-MM-DD)" required style=InputStyleBig)
-        input(type="text", name="cep"  placeholder="CEP" required style=InputStyleSmall)
-        input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyleSmall)
-        input(type="file", name="foto"  placeholder="foto de perfil" accept="image/*" required style=InputStyleBig)
-        input(type="submit", value="Editar" style=submitStyle)
+      h1(style=h1Style)= "Preencha os Campos Abaixo"
+      form(action="/usuarios/cartoes/adicionar", method="post")
+        input(type="text", name="numero"  placeholder="Número" required style=InputStyleBig autocomplete="off")
+        input(type="text", name="cvc"  placeholder="cvc" required style=InputStyleBig autocomplete="off" pattern="[0-9]{3}")
+        input(type="text" name="vencimento" placeholder="Data de Vencimento (YY/MM)" required style=InputStyleBig pattern="[0-9]{2}/[0-9]{2}")
+        input(type="submit", value="Adicionar Cartão" style=submitStyle)
       form(action="/usuarios/perfil")
         input(type="submit" value="Voltar" style=submitVoltarStyle )

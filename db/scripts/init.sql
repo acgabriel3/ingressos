@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Gerencia (
 
 CREATE TABLE IF NOT EXISTS CartaoCredito (
   	numero 		  VARCHAR(15) PRIMARY KEY NOT NULL,
-  	dt_vencimento DATE NOT NULL,
+  	dt_vencimento VARCHAR(5) NOT NULL,
   	cvc 		  DECIMAL(3) NOT NULL,
   	titular 	  VARCHAR(15) NOT NULL,
   	FOREIGN KEY (titular) REFERENCES Cliente(cpf)

@@ -38,7 +38,7 @@ exports.createProduct = (req, res, next) => {
 		categoria = categoria[0]
 	}
 	if (loja.constructor === Array) {
-		loja[0] = loja
+		loja = loja[0]
 	}
 	db.query('INSERT INTO Produto (nome, preco, foto, c_codigo) values ($1, $2, $3, $4) RETURNING codigo',
 		[nome, preco, foto, categoria], (err, result) => {
@@ -46,19 +46,21 @@ exports.createProduct = (req, res, next) => {
 				throw err
 			}
 			db.query(`INSERT INTO Estoque (codigo, nome, quantidade) values ($1, $2, $3)`,
-				[result.rows[0].codigo, loja, quantidade], (err2, result2) => {
-					if (err2) {
-						throw err2
+				[result.rows[0].codigo, loja, quantidade], (err, result) => {
+					if (err) {
+						throw err
 					}
 					res.redirect('/produtos')
-			})
+				})
 		})
 }
 
 exports.viewProduct = (req, res, next) => {
-	const prodCod = req.params.prodCod
+	let { prodCod } = req.params
+	prodCod = parseInt(prodCod)
+
 	db.query(`SELECT e.codigo AS codigo, e.nome AS loja_fornecedora, e.quantidade AS estoque,
-    p.nome AS produto, p.preco AS preco, c.nome AS categoria
+    p.nome AS produto, p.preco AS preco, c.nome AS categoria, p.foto
     FROM (Estoque AS e INNER JOIN (SELECT * from Produto where codigo = $1) AS p ON e.codigo = p.codigo) INNER JOIN Categoria AS c
       ON p.c_codigo = c.c_codigo`, [prodCod], (err, result) => {
 			if (err) {
@@ -123,8 +125,8 @@ exports.realizaCompra = (req, res, next) => {
 
 		db.query('INSERT INTO NotaFiscal(id_compra, cpf, codigo, valor_total) VALUES($1, $2, $3, $4)',
 			[idCompra, usuariosAtivos.cpf, codProd, valorCompra], (err2, result2) => {
-				
-				if(err2) {
+
+				if (err2) {
 					throw err2
 				}
 
@@ -132,3 +134,21 @@ exports.realizaCompra = (req, res, next) => {
 
 	})
 }
+
+
+exports.showCupom = (req, res, next) => {
+
+	const prodCod = req.params.prodCod
+
+	db.query(`SELECT * FROM Cupom WHERE prod_desconto = $1`, [prodCod], (err, result) => {
+
+		if (err) {
+			throw err
+		}
+
+		res.render('compra', {
+			cupoms: result.rows
+		})
+
+	})
+} 

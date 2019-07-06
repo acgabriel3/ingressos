@@ -11,7 +11,7 @@ html
     - const btnStyle = { "background-color": "#4CAF50", "border": "none", "color": "white", "padding": "15px 32px", "text-align": "center", "text-decoration": "none", "display": "inline-block", "font-size": "16px" }
 
       div(align='center')
-        form(action="/produtos/inserir" method="get")
+        a(href="/produtos/inserir")
           input(type="submit" value="Novo Produto" style=btnStyle)
       br
       br
@@ -19,7 +19,7 @@ html
         each prod in produtos
           div(style=itemBox)
             div(style=imgContainer)
-              img(src=`${prod.foto}` style=imgStyle)
+              img(src=`data:image/jpeg;base64,${prod.foto}` style=imgStyle)
             a(href=`/produtos/${prod.codigo}`)
               p= prod.produto
             p= `R$ ${prod.preco}`

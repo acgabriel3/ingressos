@@ -49,5 +49,73 @@ exports.updateUser = (req, res, next) => {
         throw error
       }
     })
-  res.redirect('../')
+  res.redirect('../perfil')
+}
+
+exports.deleteUser = (req, res, next) => {
+  const { usuarioAtivo } = req.session
+  db.query(`DELETE FROM CLIENTE WHERE cpf = $1`, [usuarioAtivo.cpf], (err, result) => {
+    if (err) {
+      throw err
+    }
+    db.query(`DELETE FROM CartaoCredito where titular = $1`, [usuarioAtivo.cpf], (err, result) => {
+      if (err) {
+        throw err
+      }
+      res.redirect('/')
+    })
+  })
+}
+
+exports.getCreditCards = (req, res, next) => {
+  const { usuarioAtivo } = req.session
+  db.query('SELECT * FROM CartaoCredito where titular = $1', [usuarioAtivo.cpf], (err, result) => {
+    if (err) {
+      throw err
+    }
+    res.render('cartoes', {
+      cartoes: result.rows
+    })
+  })
+}
+
+exports.renderCreateCartao = (req, res, next) => {
+  res.render('inserirCartao')
+}
+
+exports.createCreditCard = (req, res, next) => {
+  const { numero, cvc, vencimento } = req.body
+  const { usuarioAtivo } = req.session
+  db.query('INSERT INTO CartaoCredito (numero, dt_vencimento, cvc, titular) values($1, $2, $3, $4)',
+    [numero, vencimento, cvc, usuarioAtivo.cpf], (err, result) => {
+      if (err) {
+        throw err
+      }
+      res.redirect('../perfil')
+    })
+}
+
+exports.renderDeleteCartao = (req, res, next) => {
+  const { usuarioAtivo } = req.session
+  db.query('SELECT * FROM CartaoCredito where titular = $1', [usuarioAtivo.cpf], (err, result) => {
+    if (err) {
+      throw err
+    }
+    res.render('excluirCartao', {
+      cartoes: result.rows 
+    })
+  })
+}
+
+exports.deleteCreditCard = (req, res, next) => {
+  const { numero } = req.body
+  if (numero.constructor === Array) {
+		numero = numero[0]
+	}
+  db.query(`DELETE FROM CartaoCredito where numero = $1`, [numero], (err, result) => {
+    if (err) {
+      throw err
+    }
+    res.redirect('../perfil')
+  })
 }
