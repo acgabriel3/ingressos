@@ -27,5 +27,6 @@ html
         input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyleSmall)
         input(type="file", name="foto"  placeholder="foto de perfil" accept="image/*" required style=InputStyleBig)
         input(type="submit", value="Editar" style=submitStyle)
-      form(action="/usuarios/perfil")
+      
+      a(href="/usuarios/perfil")
         input(type="submit" value="Voltar" style=submitVoltarStyle )

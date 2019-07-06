@@ -75,4 +75,14 @@ INSERT INTO Estoque (codigo, nome, quantidade)
 	values(20, 'Cia Toy', 10);	
 
 INSERT INTO Estoque (codigo, nome, quantidade)
-	values(21, 'Cia Toy', 44);			
+	values(21, 'Cia Toy', 44);		
+
+
+-- Inserido cupoms de promocao
+
+INSERT INTO Cupom(valor, dt_validade, prod_desconto) VALUES (20, '2019-12-01', 2);
+INSERT INTO Cupom(valor, dt_validade, prod_desconto) VALUES (20, '2019-12-01', 3);
+INSERT INTO Cupom(valor, dt_validade, prod_desconto) VALUES (20, '2019-12-01', 16);
+INSERT INTO Cupom(valor, dt_validade, prod_desconto) VALUES (20, '2019-12-01', 4);
+INSERT INTO Cupom(valor, dt_validade, prod_desconto) VALUES (20, '2019-12-01', 5);
+INSERT INTO Cupom(valor, dt_validade, prod_desconto) VALUES (20, '2019-12-01', 6);

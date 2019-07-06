@@ -8,5 +8,6 @@ usuarios.post('/', upload.single('foto'), controller.createUser)
 
 usuarios.use('/perfil', require('./perfil'))
 usuarios.use('/cartoes', require('./cartoes'))
+usuarios.use('/compras', require('./comprasFeitas'))
 
 module.exports = usuarios

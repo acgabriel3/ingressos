@@ -4,4 +4,57 @@ html
   body
     include navheader.pug
 
-  p= "teste"
+  - const submitStyle = { "width": "300px", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+  - const imgContainer = { "display": "flex", "width": "200px", "height": "200px", "overflow": "hidden", "border-radius": "50%", "z-index": "1", "justify-content": "center" }
+  - const imgStyle = { "width": "auto", "height": "100%"}
+  - const numStyle = { "font-size": "20px", "border": "1px solid black", "background": "#f2aa8b"  }
+  - const prodInfoDiv = { "margin-top": "-150px" }
+  - const CardBox = { "width": "250px", "height": "50px", "border": "1px solid #000", "padding-top": "15px", "background": "#768b8f" }
+  - const CupomBox = { "width": "250px", "height": "50px", "border": "1px solid #000", "padding-top": "15px", "background": "#768b8f" }
+  - const finalizarStyle = { "width": "300px", "padding": "15px"," background-color": "#f00840", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+
+  div(align='center' style=imgContainer)
+    img(src=`data:image/jpeg;base64,${produto.foto}` style=imgStyle)
+  
+  div(style=prodInfoDiv)
+    p(align='center')
+      var= produto.produto
+    p(align='center')
+      b preço:
+      var= produto.preco
+    p(align='center')
+      b fornecedor:
+      var= produto.loja_fornecedora
+  br
+  br
+  br
+  br
+  form(action=`/produtos/${produto.codigo}/compra` method="post") 
+    div(style={ float: 'left', width: '50%' })
+      h3= "Selecione um Cartão para efetuar a compra"
+      each cartao in cartoes
+        div(style=CardBox)
+          input(type="checkbox", name="cartao" value=cartao)
+          div(style={ "padding-top": '5px' })
+            b(style={ padding: '0 10px 0 10px' }) Número:
+            var(style=numStyle)= cartao.numero
+        br
+    
+    div(style={ float: 'left', width: '50%' })
+      h3= "Cupons de Desconto especiais para você"
+      if cupons.length > 0
+        each cupom in cupons
+          div(style=CardBox)
+            input(type="checkbox", name="cupom" value=cupom) 
+            div(style={ "padding-top": '5px' })
+              b(style={ padding: '0 10px 0 10px' }) Valor:
+              var= `${cupom.valor}%`
+          br
+      else
+        b Infelizmente não há cupons para este produto
+        
+    div(align='center' style={ clear: 'both' })
+      input(type="submit" value="Finalizar" style=finalizarStyle)
+      br
+      a(href=`/produtos/${produto.codigo}`)
+        input(type="submit" value="Voltar" style=submitStyle)

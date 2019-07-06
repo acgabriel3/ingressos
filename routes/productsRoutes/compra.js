@@ -1,9 +1,9 @@
-const compras = require('express').Router()
+const compras = require('express').Router({
+  mergeParams: true
+})
 const controller = require('../../controllers/produtos')
 
 compras.get('/', controller.renderCompra)
-compras.post('/', controller.realizaCompra)
-
-compras.get('/cupom', controller.showCupom)
+compras.post('/', controller.realizaCompra, controller.realizaCompraSemDesconto)
 
 module.exports = compras

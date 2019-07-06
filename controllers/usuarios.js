@@ -102,7 +102,7 @@ exports.renderDeleteCartao = (req, res, next) => {
       throw err
     }
     res.render('excluirCartao', {
-      cartoes: result.rows 
+      cartoes: result.rows
     })
   })
 }
@@ -110,12 +110,24 @@ exports.renderDeleteCartao = (req, res, next) => {
 exports.deleteCreditCard = (req, res, next) => {
   const { numero } = req.body
   if (numero.constructor === Array) {
-		numero = numero[0]
-	}
+    numero = numero[0]
+  }
   db.query(`DELETE FROM CartaoCredito where numero = $1`, [numero], (err, result) => {
     if (err) {
       throw err
     }
     res.redirect('../perfil')
+  })
+}
+
+exports.renderComprasFeitas = (req, res, next) => {
+  const { usuarioAtivo } = req.session
+  db.query(`SELECT * FROM Compra where cpf = $1`, [usuarioAtivo.cpf], (err, result) => {
+    if (err) {
+      throw err
+    }
+    res.render('comprasFeitas', {
+      compras: result.rows
+    })
   })
 }

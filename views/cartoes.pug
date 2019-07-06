@@ -4,7 +4,6 @@ html
   body
     include navheader.pug
 
-
   - const divStyle = { "display": "inline-block", "top": "0", "width": "300px", "margin": "0 auto", "font-family": "Tahoma, Geneva, sans-serif" }
   - const itemBox = { "width": "250px", "height": "200px", "border": "1px solid #000", "padding-top": "15px", "background": "#768b8f" }
   - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#5234ea", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
@@ -14,7 +13,7 @@ html
 
     div(style=voltarDivStyle)
       div(style=divStyle)
-        form(action="/usuarios/cartoes/adicionar")
+        a(href="/usuarios/cartoes/adicionar")
           input(type="submit" value="Adicionar Cartão" style=submitStyle)
         a(href="/usuarios/cartoes/excluir")
           input(type="submit" value="Excluir Cartão" style=submitStyle)

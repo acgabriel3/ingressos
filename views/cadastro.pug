@@ -12,6 +12,7 @@ html
     - const InputStyleSmall = { "width": "50%", "padding": "15px", "border": "1px solid #dddddd", "margin-bottom": "15px", "box-sizing": "border-box"}
     - const submitStyle = { "width": "100%", "padding": "15px"," background-color": "#535b63", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     - const submitVoltarStyle = { "width": "100%", "padding": "15px"," background-color": "#f08080", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
+    
     div(style=divStyle)
       h1(style=h1Style)= "Preencha os Campos Abaixo"
       form(action="/usuarios", method="post" enctype="multipart/form-data")
@@ -25,5 +26,5 @@ html
         input(type="text", name="num_casa"  placeholder="número da casa" required style=InputStyleSmall)
         input(type="file", name="foto"  placeholder="foto de perfil" accept="image/*" required style=InputStyleBig)
         input(type="submit", value="Cadastrar" style=submitStyle)
-      form(action="../")
+      a(href="../")
         input(type="submit" value="Voltar" style=submitVoltarStyle )
