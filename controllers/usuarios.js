@@ -54,15 +54,25 @@ exports.updateUser = (req, res, next) => {
 
 exports.deleteUser = (req, res, next) => {
   const { usuarioAtivo } = req.session
-  db.query(`DELETE FROM CLIENTE WHERE cpf = $1`, [usuarioAtivo.cpf], (err, result) => {
+  db.query(`DELETE FROM CartaoCredito where titular = $1`, [usuarioAtivo.cpf], (err, result) => {
     if (err) {
       throw err
     }
-    db.query(`DELETE FROM CartaoCredito where titular = $1`, [usuarioAtivo.cpf], (err, result) => {
+    db.query(`DELETE FROM NotaFiscal where cpf = $1`, [usuarioAtivo.cpf], (err, result) => {
       if (err) {
         throw err
       }
-      res.redirect('/')
+      db.query(`DELETE FROM Compra where cpf = $1`, [usuarioAtivo.cpf], (err, result) => {
+        if (err) {
+          throw err
+        }
+        db.query(`DELETE FROM CLIENTE WHERE cpf = $1`, [usuarioAtivo.cpf], (err, result) => {
+          if (err) {
+            throw err
+          }
+          res.redirect('/')
+        })
+      })
     })
   })
 }
@@ -126,8 +136,26 @@ exports.renderComprasFeitas = (req, res, next) => {
     if (err) {
       throw err
     }
-    res.render('comprasFeitas', {
-      compras: result.rows
-    })
+    const codigoProdutos = []
+    result.rows.forEach(compra => {
+      codigoProdutos.push(compra.codigo)
+    });
+
+    let produtos = []
+    for (let i = 0; i <= codigoProdutos.length; i++) {
+      db.query(`SELECT nome, codigo from produto where codigo = $1`, [codigoProdutos[i]], (err, result2) => {
+        if (err) {
+          throw err
+        }
+        produtos.push(result2.rows[0])
+        if (i == codigoProdutos.length) {
+          setTimeout(function () {}, 2000);
+          res.render('comprasFeitas', {
+            compras: result.rows,
+            produtos: produtos
+          })
+        }
+      })
+    }
   })
 }

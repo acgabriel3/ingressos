@@ -4,6 +4,6 @@ const compras = require('express').Router({
 const controller = require('../../controllers/produtos')
 
 compras.get('/', controller.renderCompra)
-compras.post('/', controller.realizaCompra, controller.realizaCompraSemDesconto)
+compras.post('/', controller.realizaCompra)
 
 module.exports = compras

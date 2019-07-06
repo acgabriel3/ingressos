@@ -102,36 +102,23 @@ exports.renderCompra = (req, res, next) => {
 }
 
 exports.realizaCompra = (req, res, next) => {
-	const { prodCod } = req.params
+	let { prodCod } = req.params
 	const { cupom, cartao } = req.body
-
-	console.log('req.body', req.body)
+	prodCod = parseInt(prodCod)
 
 	// verifica se hah estoque o suficiente para o produto
-	// tá bugado pq nessa view só tem os produtos que possuem algum cupom --> sim foi o que eu disse
+	// tá bugado pq nessa view só tem os produtos que possuem algum cupom
 	db.query(`SELECT * FROM infoProduto WHERE codigo = $1`, [prodCod], (err, result) => {
 		if (err) {
 			throw err
 		}
 
-		// se nao tiver cupom = undefined e o resto todo crasha
-
-		// vou dar push pra vc debugar ai no teu terminal...
-		// essa porra n da certo, vou dar uma pausa
-		let infoProduto = null 
-		for(let i = 0; i < result.rows.length; i++) {
-			
-			if(result.rows[i].prod_desconto == prodCod) 
-				let infoProduto = result.rows[i]// aqui ele esta pegando o cupom selecionado
-		
-		}
-		console.log('info', infoProduto)
-
-		if (infoProduto == null) {
-			realizaCompraSemDesconto()
-			// next() // o next seria para se vc definir na mesma rota, mas embaixo da rota atual, a funcao realizaCompraSemDesconto
+		if (result.rows.length === 0) {
+			realizaCompraSemDesconto(req, res, next)
 			return
 		}
+
+		const infoProduto = result.rows[0]
 
 		// se não há estoque não há nada pra fazer
 		if (infoProduto.estoque < 1) {
@@ -161,22 +148,24 @@ exports.realizaCompra = (req, res, next) => {
 					if (err) {
 						throw err
 					}
-					// a query de cime retorna o id da compra que é usado na nota fiscal
-					// aqui é criado a nota fiscal da compra feita
-					db.query(`INSERT INTO NotaFiscal (id_compra, cpf, cnpj, codigo, valor_total) values($1, $2, $3, $4, $5)`,
-						[resultIdCompra.rows[0].id_compra, usuarioAtivo.cpf, infoProduto.loja_fornecedora, prodCod, valorCompra],
-						(err, result) => {
-							if (err) {
-								throw err
-							}
-							console.log('resultado na nota fiscal', result)
-							res.redirect('/produto') // faz mais sentido voltar pra produto
-						})
+					db.query(`SELECT cnpj from Loja where nome = $1`, [infoProduto.loja_fornecedora], (err, result) => {
+						// a query de cima retorna o id da compra que é usado na nota fiscal
+						// aqui é criado a nota fiscal da compra feita
+						const cnpj = result.rows[0].cnpj
+						db.query(`INSERT INTO NotaFiscal (id_compra, cpf, cnpj, codigo, valor_total) values($1, $2, $3, $4, $5)`,
+							[resultIdCompra.rows[0].id_compra, usuarioAtivo.cpf, cnpj, cupom.codigo, valorCompra],
+							(err, result) => {
+								if (err) {
+									throw err
+								}
+								res.redirect('/usuarios/perfil') // faz mais sentido voltar pra produto
+							})
+					})
 				})
 		})
 	})
 }
 
-exports.realizaCompraSemDesconto = (req, res, enxt) => {
-	console.log('sem desconto irmao');
+function realizaCompraSemDesconto(req, res, enxt) {
+	res.send('sem cupom de desconto')
 }

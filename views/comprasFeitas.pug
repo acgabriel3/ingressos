@@ -14,16 +14,17 @@ html
     - const submitVoltarStyle = { "width": "100%", "padding": "15px"," background-color": "#f08080", "border": "0", "margin-bottom": "2px", "box-sizing": "border-box", "cursor": "pointer", "font-weight": "bold", "color": "#ffffff" } 
     
     include navheader.pug
-
+    - var prodIdx = 0
     each compra in compras
       div(style={ border: '1px solid black' })
       p
         b Data da Compra: 
         var= compra.dt_compra
       p
-        b Código do produto: 
-        var= compra.codigo
+        b Produto Comprado: 
+        var= produtos[prodIdx].nome
       p
         b Valor: 
         var= `R$ ${compra.valor}`
       br
+      - prodIdx = prodIdx + 1
