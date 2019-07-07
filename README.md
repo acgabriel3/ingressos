@@ -20,9 +20,9 @@ create database lojas_cerradinho;
 \c lojas_cerradinho
 \i db/scripts/end.sql
 \i db/scripts/init.sql
+\i ./db/scripts/procedures.sql
 \i db/scripts/produto.sql
 \i db/scripts/estoque.sql
-\i ./db/scripts/procedures.sql
 \q
 ```
 
@@ -33,9 +33,9 @@ psql.exe -U postgres -d lojas_cerradinho
 root
 \i db/scripts/end.sql
 \i db/scripts/init.sql
+\i ./db/scripts/procedures.sql
 \i db/scripts/produto.sql
 \i db/scripts/estoque.sql
-\i ./db/scripts/procedures.sql
 \q
 ```
 
